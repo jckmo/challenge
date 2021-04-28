@@ -1,10 +1,9 @@
-const appReducer = (state = {searchTitle: '', searchYear: ''}, action) => {
+const appReducer = (state = {searchTitles: ''}, action) => {
   switch (action.type) {
     case 'UPDATE_SEARCH':
       return {
         ...state,
-        searchTitle: action.title,
-        searchYear: action.year,
+        searchTitles: action.titles,
       }
     // case 'RESET_SEARCH':
     //   return {

@@ -5,10 +5,10 @@ const exSearch = (desiredTitle) => {
     fetch(`${API}&s=${desiredTitle}`)
       .then(response => response.json())
       .then(jsonResponse => {
-        if (jsonResponse.Response !== 'False' && desiredTitle !== '') {          
-          let title = jsonResponse.Search[0].Title
-          let year = jsonResponse.Search[0].Year
-          dispatch({type: 'UPDATE_SEARCH', title: title, year: year})
+        if (jsonResponse.Response !== 'False' && desiredTitle !== '') {
+          dispatch({type: 'UPDATE_SEARCH', titles: jsonResponse.Search})
+        } else if (desiredTitle === '') {
+          dispatch({type: 'UPDATE_SEARCH', titles: ''})
         }
       })
   }
