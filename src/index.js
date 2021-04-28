@@ -11,11 +11,15 @@ import thunk from 'redux-thunk'
 
 const API = `http://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
 
+const store = createStore(appReducer, applyMiddleware(thunk))
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <Router>
+      <Route path='/' component={App}/>
+    </Router>
+  </Provider>
+  ,document.getElementById('root')
 );
 
 export default API

@@ -1,9 +1,10 @@
 import './App.css';
+import Search from './components/Search.jsx'
 
 function App() {
   return (
     <div className="App">
-      just a blank page
+      <Search/>
     </div>
   );
 }
