@@ -11,6 +11,8 @@ import thunk from 'redux-thunk'
 
 const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
 
+const POSTER_API = `http://img.omdbapi.com/?i=tt3896198&h=600&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
+
 
 const store = createStore(appReducer, applyMiddleware(thunk))
 
@@ -23,4 +25,4 @@ ReactDOM.render(
   ,document.getElementById('root')
 );
 
-export default API
+export {API, POSTER_API}

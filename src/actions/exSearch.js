@@ -1,7 +1,7 @@
-import API from '../index.js'
+import {API} from '../index.js'
 
-const exSearch = (desiredTitle) => {
-  return (dispatch) => {
+const exSearch = desiredTitle => {
+  return dispatch => {
     fetch(`${API}&s=${desiredTitle}`)
       .then(response => response.json())
       .then(jsonResponse => {
