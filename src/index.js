@@ -9,11 +9,7 @@ import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
-// dev URL
-// const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
-
-// prod URL
-const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}`
+const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
 
 
 const store = createStore(appReducer, applyMiddleware(thunk))
