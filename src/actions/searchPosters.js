@@ -1,5 +1,5 @@
 import {POSTER_API} from '../index.js'
-let fs = require('fs')
+// let fs = require('fs')
 
 
 const searchPosters = title => {

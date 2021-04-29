@@ -2,7 +2,7 @@ import React from 'react'
 import SearchResults from './SearchResults.jsx'
 
 import exSearch from '../actions/exSearch.js'
-import searchPosters from '../actions/searchPosters.js'
+// import searchPosters from '../actions/searchPosters.js'
 import {connect} from 'react-redux'
 
 class Search extends React.Component {
