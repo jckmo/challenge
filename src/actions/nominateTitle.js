@@ -8,7 +8,8 @@ const nominateTitle = title => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: title
+        title: title,
+        userId: sessionStorage.userId
       })
     })
     .then(response => response.json())

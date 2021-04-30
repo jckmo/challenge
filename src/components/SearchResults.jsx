@@ -1,6 +1,6 @@
 import React from 'react'
 import uuid from 'react-uuid'
-import Banner from 'react-js-banner'
+// import Banner from 'react-js-banner'
 
 
 class SearchResults extends React.Component {
