@@ -9,17 +9,17 @@ import {connect} from 'react-redux'
 
 class Search extends React.Component {
   handleInput = title => {
-
     this.props.exSearch(title)
   }
 
   render() {
     return (
-      <div className='search'>
-        <div className='search-bar'>
-          <label>OMDB Search</label><br/>
-          <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/><br/>
-        </div>
+        <div className='search'>
+          <div className='search-bar'>
+            <label>OMDB Search</label><br/>
+            <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/><br/>
+            <button>Nominations</button>
+          </div>
         <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>
       </div>
     )

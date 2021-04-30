@@ -1,14 +1,11 @@
 import React from 'react'
 import uuid from 'react-uuid'
+import Banner from 'react-js-banner'
+
 
 class SearchResults extends React.Component {
   componentDidMount = () => {
-      this.props.fetchPrevNominations()
-  }
-
-  nominateTitle = title => {
-    this.props.nominateTitle(title)
-    console.log(this.props.nominatedTitles)
+    this.props.fetchPrevNominations()
   }
 
   createGenericPoster = title => {
@@ -42,6 +39,7 @@ class SearchResults extends React.Component {
                 <p>Nominations: {title.timesNominated}</p>
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
+              <button onClick={() => this.props.nominateTitle(title)}>Remove</button>
             </div>
           )
         })}
@@ -65,7 +63,7 @@ class SearchResults extends React.Component {
                 </div>
               {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}
 
-              <button onClick={() => this.nominateTitle(title)}>Nominate this title</button>
+              <button onClick={() => this.props.nominateTitle(title)}>Nominate this title</button>
             </div>
           )}  
         )}

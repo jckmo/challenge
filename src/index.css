@@ -10,9 +10,10 @@
   width: 93%;
   top: -2%;
   padding: 6% 0 4% 4%;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   border-radius: 3%/15%;
+  border: 2px solid gray;
 }
 
 .search-results {
@@ -37,7 +38,7 @@
   width: 85%;
   border-radius: 3%/5%;
   margin: 4% 0 1.5% 0;
-  padding: 0 2.5% 0 2.5%;
+  padding: 1% 2.5% 2.5%2.5%;
   text-overflow: clip;
   display: flex;
   flex-wrap: wrap;
@@ -55,6 +56,9 @@
 
 .nominated-titles {
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .movie-info {
