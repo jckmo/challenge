@@ -9,10 +9,12 @@ class SearchResults extends React.Component {
 
   createGenericPoster = title => {
     let splitTitle = title.Title.split(' ')
-    let titleFirst = splitTitle[1].split('')[0].toUpperCase()
+    let titleFirst = splitTitle[0].split('')[0].toUpperCase()
     let titleSecond
-    if (splitTitle[1].split('')[0] !== undefined) {
+    if (splitTitle[1].split('')[1] !== undefined) {
       titleSecond = splitTitle[1].split('')[0].toUpperCase()
+    } else {
+      titleSecond = ''
     }
 
     return (
@@ -29,12 +31,14 @@ class SearchResults extends React.Component {
         {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.nominatedTitles.map(title => {
           return (
-            <div key={uuid()}>
-              <h3>{title.title}</h3>
-              <h5>{title.year}</h5>
-              <h5>Nominations: {title.timesNominated}</h5>
+            <>
+              <div className='movie-info' key={uuid()}>
+                <h3>{title.title}</h3>
+                <h5>{title.year}</h5>
+                <h5>Nominations: {title.timesNominated}</h5>
+              </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
-            </div>
+            </>
           )
         })}
       </div>

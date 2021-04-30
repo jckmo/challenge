@@ -15,8 +15,10 @@ class Search extends React.Component {
   render() {
     return (
       <div className='search'>
-        <label>OMDB Search</label><br/>
-        <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/><br/>
+        <div className='search-bar'>
+          <label>OMDB Search</label><br/>
+          <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/><br/>
+        </div>
         <SearchResults nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>
       </div>
     )
