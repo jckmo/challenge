@@ -25,16 +25,16 @@ class SearchResults extends React.Component {
 
   rollNominated = () => {
     return (
-      <div>
+      <div className='nominated-titles'>
         {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.nominatedTitles.map(title => {
           return (
-            <>
+            <div key={uuid()}>
               <h3>{title.title}</h3>
               <h5>{title.year}</h5>
               <h5>Nominations: {title.timesNominated}</h5>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
-            </>
+            </div>
           )
         })}
       </div>
@@ -47,12 +47,14 @@ class SearchResults extends React.Component {
         {this.props.titles === "" ? this.rollNominated() : this.props.titles.map(title => {
           return (
             <div className='movie' key={uuid()}>
-              <p key={uuid()}>
-                {title.Title}
-              </p>
-              <p key={uuid()}>
-                {title.Year}
-              </p>
+              <div className='movie-info'>
+                  <p key={uuid()}>
+                    {title.Title}
+                  </p>
+                  <p key={uuid()}>
+                    {title.Year}
+                  </p>
+                </div>
               {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}
 
               <button onClick={() => this.nominateTitle(title)}>Nominate this title</button>
