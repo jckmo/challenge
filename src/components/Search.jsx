@@ -2,13 +2,13 @@ import React from 'react'
 import SearchResults from './SearchResults.jsx'
 
 import exSearch from '../actions/exSearch.js'
-import nominateMovie from '../actions/nominateMovie.js'
+import nominateTitle from '../actions/nominateTitle.js'
 // import addNomination from '../actions/addNomination.js'
 import {connect} from 'react-redux'
 
 class Search extends React.Component {
   handleInput = title => {
-    
+
     this.props.exSearch(title)
   }
 
@@ -17,7 +17,7 @@ class Search extends React.Component {
       <div className='search'>
         <label>OMDB Search</label><br/>
         <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/><br/>
-        <SearchResults nominateMovie={this.props.nominateMovie} nominatedMovies={this.props.nominatedMovies} titles={this.props.searchTitles}/>
+        <SearchResults nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>
       </div>
     )
   }
@@ -26,14 +26,14 @@ class Search extends React.Component {
 const mapStateToProps = state => {
   return {
     searchTitles: state.searchTitles,
-    nominatedMovies: state.nominatedMovies
+    nominatedTitles: state.nominatedTitles
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     exSearch: (x) => dispatch(exSearch(x)),
-    nominateMovie: (x) => dispatch(nominateMovie(x)),
+    nominateTitle: (x) => dispatch(nominateTitle(x)),
     // addNomination: (x) => dispatch(addNomination(x))
   }
 }

@@ -1,4 +1,4 @@
-const appReducer = (state = {searchTitles: '', nominatedMovies: []}, action) => {
+const appReducer = (state = {searchTitles: '', nominatedTitles: []}, action) => {
   switch (action.type) {
     case 'UPDATE_SEARCH':
       return {
@@ -8,10 +8,12 @@ const appReducer = (state = {searchTitles: '', nominatedMovies: []}, action) => 
     case 'NOMINATE':
       return {
         ...state,
-        nominatedMovies: [
-          ...state.nominatedMovies, 
+        nominatedTitles: [
+          ...state.nominatedTitles, 
           {
-            title: action.title,
+            title: action.title.Title,
+            year: action.title.Year,
+            poster: action.title.Poster,
             nominated: true,
             timesNominated: 1
           }

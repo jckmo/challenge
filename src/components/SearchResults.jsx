@@ -2,8 +2,9 @@ import React from 'react'
 import uuid from 'react-uuid'
 
 class SearchResults extends React.Component {
-  nominateMovie = title => {
-    this.props.nominateMovie(title)
+  nominateTitle = title => {
+    this.props.nominateTitle(title)
+    console.log(this.props.nominatedTitles)
   }
 
   createGenericPoster = title => {
@@ -22,10 +23,28 @@ class SearchResults extends React.Component {
     )
   }
 
+  rollNominated = () => {
+    return (
+      <div>
+        {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
+        {this.props.nominatedTitles.map(title => {
+          return (
+            <>
+              <h3>{title.title}</h3>
+              <h5>{title.year}</h5>
+              <h5>Nominations: {title.timesNominated}</h5>
+              <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
+            </>
+          )
+        })}
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className='search-results'>
-        {this.props.titles === "" ? null : this.props.titles.map(title => {
+        {this.props.titles === "" ? this.rollNominated() : this.props.titles.map(title => {
           return (
             <div className='movie' key={uuid()}>
               <p key={uuid()}>
@@ -36,7 +55,7 @@ class SearchResults extends React.Component {
               </p>
               {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}
 
-              <button onClick={() => this.nominateMovie(title.Title)}>Nominate this title</button>
+              <button onClick={() => this.nominateTitle(title)}>Nominate this title</button>
             </div>
           )}  
         )}
