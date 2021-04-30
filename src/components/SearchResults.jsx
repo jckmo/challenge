@@ -2,19 +2,24 @@ import React from 'react'
 import uuid from 'react-uuid'
 
 class SearchResults extends React.Component {
-  nominateMovie = (title) => {
+  nominateMovie = title => {
     this.props.nominateMovie(title)
-    console.log(this.props.nominatedMovies)
-    // this.updateNominations()
   }
 
-  // updateNominations = () => {
-  //   console.log(this.props.nominatedMovies)
-  // }
+  createGenericPoster = title => {
+    let splitTitle = title.Title.split(' ')
+    let titleFirst = splitTitle[1].split('')[0].toUpperCase()
+    let titleSecond
+    if (splitTitle[1].split('')[0] !== undefined) {
+      titleSecond = splitTitle[1].split('')[0].toUpperCase()
+    }
 
-  checkNominations = title => {
-    // let filteredTitles = this.props.nominatedMovies.filter(nominated => title === nominated)
-
+    return (
+      <div className='generic-poster'>
+        {titleFirst}
+        {titleSecond}
+      </div>
+    )
   }
 
   render() {
@@ -29,9 +34,9 @@ class SearchResults extends React.Component {
               <p key={uuid()}>
                 {title.Year}
               </p>
-              <button onClick={() => this.nominateMovie(title.Title)}>Nominate this title</button>
+              {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}
 
-              {/* {this.checkNominations(title.Title)} */}
+              <button onClick={() => this.nominateMovie(title.Title)}>Nominate this title</button>
             </div>
           )}  
         )}

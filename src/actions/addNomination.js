@@ -1,6 +1,6 @@
 const addNomination = title => {
   return dispatch => {
-
+    
   }
 }
 

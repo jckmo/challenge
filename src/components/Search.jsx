@@ -3,21 +3,14 @@ import SearchResults from './SearchResults.jsx'
 
 import exSearch from '../actions/exSearch.js'
 import nominateMovie from '../actions/nominateMovie.js'
-import addNomination from '../actions/addNomination.js'
-// import searchPosters from '../actions/searchPosters.js'
+// import addNomination from '../actions/addNomination.js'
 import {connect} from 'react-redux'
 
 class Search extends React.Component {
   handleInput = title => {
+    
     this.props.exSearch(title)
-    // this.handlePosters()
   }
-
-  // handlePosters = () => {
-  //   if (this.props.searchTitles !== '') {
-  //     this.props.searchTitles.map(title => this.props.searchPosters(title))
-  //   }
-  // }
 
   render() {
     return (
@@ -41,8 +34,7 @@ const mapDispatchToProps = dispatch => {
   return {
     exSearch: (x) => dispatch(exSearch(x)),
     nominateMovie: (x) => dispatch(nominateMovie(x)),
-    addNomination: (x) => dispatch(addNomination(x))
-    // searchPosters: (x) => dispatch(searchPosters(x))
+    // addNomination: (x) => dispatch(addNomination(x))
   }
 }
 
