@@ -2,6 +2,10 @@ import React from 'react'
 import uuid from 'react-uuid'
 
 class SearchResults extends React.Component {
+  componentDidMount = () => {
+      this.props.fetchPrevNominations()
+  }
+
   nominateTitle = title => {
     this.props.nominateTitle(title)
     console.log(this.props.nominatedTitles)
@@ -31,14 +35,14 @@ class SearchResults extends React.Component {
         {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.nominatedTitles.map(title => {
           return (
-            <>
+            <div key={uuid()} className='movie'>
               <div className='movie-info' key={uuid()}>
-                <h3>{title.title}</h3>
-                <h5>{title.year}</h5>
-                <h5>Nominations: {title.timesNominated}</h5>
+                <p>{title.title}</p>
+                <p>{title.year}</p>
+                <p>Nominations: {title.timesNominated}</p>
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
-            </>
+            </div>
           )
         })}
       </div>

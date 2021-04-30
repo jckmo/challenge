@@ -3,7 +3,8 @@ import SearchResults from './SearchResults.jsx'
 
 import exSearch from '../actions/exSearch.js'
 import nominateTitle from '../actions/nominateTitle.js'
-// import addNomination from '../actions/addNomination.js'
+import fetchPrevNominations from '../actions/fetchPrevNominations.js'
+
 import {connect} from 'react-redux'
 
 class Search extends React.Component {
@@ -19,7 +20,7 @@ class Search extends React.Component {
           <label>OMDB Search</label><br/>
           <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/><br/>
         </div>
-        <SearchResults nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>
+        <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>
       </div>
     )
   }
@@ -36,7 +37,7 @@ const mapDispatchToProps = dispatch => {
   return {
     exSearch: (x) => dispatch(exSearch(x)),
     nominateTitle: (x) => dispatch(nominateTitle(x)),
-    // addNomination: (x) => dispatch(addNomination(x))
+    fetchPrevNominations: () => dispatch(fetchPrevNominations())
   }
 }
 
