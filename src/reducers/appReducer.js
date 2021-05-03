@@ -1,6 +1,5 @@
 const appReducer = (state = {searchTitles: '', nominatedTitles: []}, action) => {
   switch (action.type) {
-    
     case 'UPDATE_SEARCH':
       return {
         ...state,

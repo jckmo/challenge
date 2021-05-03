@@ -2,20 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
 import Login from './components/Login.jsx'
 import Loading from './components/Loading.jsx'
+import Signup from './components/Signup.jsx'
 
-import appReducer from './reducers/appReducer.js'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
+import appReducer from './reducers/appReducer.js'
+
 const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
 
-  // dev
+// dev
 const BACKEND = `http://localhost:3001`
-  // prod
+// prod
 // const BACKEND = `some heroku link`
 
 
@@ -24,7 +27,8 @@ const store = createStore(appReducer, applyMiddleware(thunk))
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route exact path='/' component={Login}/>
+      <Route exact path='/' component={Signup}/>
+      <Route exact path='/login' component={Login}/>
       <Route path='/loading' component={Loading}/>
       <Route path='/app' component={App}/>
     </Router>

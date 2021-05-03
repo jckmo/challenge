@@ -11,17 +11,9 @@ class SearchResults extends React.Component {
   createGenericPoster = title => {
     let splitTitle = title.Title.split(' ')
     let titleFirst = splitTitle[0].split('')[0].toUpperCase()
-    let titleSecond
-    if (splitTitle[1].split('')[1] !== undefined) {
-      titleSecond = splitTitle[1].split('')[0].toUpperCase()
-    } else {
-      titleSecond = ''
-    }
-
     return (
       <div className='generic-poster'>
         {titleFirst}
-        {titleSecond}
       </div>
     )
   }
