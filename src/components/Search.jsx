@@ -14,7 +14,10 @@ class Search extends React.Component {
   }
 
   logoutUser = () => {
+    this.props.history.push('/loading')
     this.props.logoutUser()
+    
+    this.props.history.push('/')
   }
 
   render() {
@@ -24,7 +27,7 @@ class Search extends React.Component {
             <label>OMDB Search</label><br/>
           <div className='search-bar'>
             <input type='text' placeholder='enter movie title here' onChange={(e) => this.handleInput(e.target.value)}/>
-            <div className='user-info' onClick={() => this.logoutUser()}>Logout</div>
+            <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
         <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>

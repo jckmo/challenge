@@ -8,11 +8,10 @@ const logoutUser = () => {
         'Content-Type': 'application/json',
       }
     })
-    .then(response => response.json())
-    .then(jsonResponse => {
+    .then(() => {
       sessionStorage.clear()
+      dispatch({type: 'LOGOUT'})
     })
-
   }
 }
 

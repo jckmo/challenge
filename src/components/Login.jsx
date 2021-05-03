@@ -1,5 +1,7 @@
 import React from 'react'
-import {BACKEND} from '../index.js'
+
+import login from '../actions/login.js'
+import {connect} from 'react-redux'
 
 
 class Login extends React.Component {
@@ -28,23 +30,12 @@ class Login extends React.Component {
   handleSubmit = (e) => { 
     e.preventDefault()
     this.props.history.push('/loading')
-    fetch(`${BACKEND}/sessions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user: {
-          userName: this.state.userName,
-          password: this.state.password
-        }
-      })    
+    this.props.login(this.state.userName, this.state.password)
+    this.setState({
+      userName: '',
+      password: ''
     })
-    .then(response => response.json())
-    .then(jsonResponse => {
-      sessionStorage.setItem('userId', jsonResponse.id)
-      this.props.history.push('/app')
-    })
+    this.props.history.push('/app')
   }
 
   render() {
@@ -64,4 +55,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (x,y) => dispatch(login(x,y))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login)

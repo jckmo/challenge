@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 
 import Login from './components/Login.jsx'
 import Loading from './components/Loading.jsx'
 import Signup from './components/Signup.jsx'
+import Search from './components/Search.jsx'
 
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
@@ -30,7 +30,7 @@ ReactDOM.render(
       <Route exact path='/' component={Signup}/>
       <Route exact path='/login' component={Login}/>
       <Route path='/loading' component={Loading}/>
-      <Route path='/app' component={App}/>
+      <Route path='/app' component={Search}/>
     </Router>
   </Provider>
   ,document.getElementById('root')

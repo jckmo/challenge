@@ -1,5 +1,15 @@
-const appReducer = (state = {searchTitles: '', nominatedTitles: []}, action) => {
+const appReducer = (state = {currentUser: '', searchTitles: '', nominatedTitles: []}, action) => {
   switch (action.type) {
+    case 'LOGIN': 
+      return {
+        ...state,
+        currentUser: action.currentUser
+      }
+    case 'LOGOUT':
+      return {
+        ...state,
+        currentUser: ''
+      }
     case 'UPDATE_SEARCH':
       return {
         ...state,
