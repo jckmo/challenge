@@ -2,7 +2,7 @@ import {BACKEND} from '../index.js'
 
 const nominateTitle = title => {
   return dispatch => {
-    fetch(`${BACKEND}/titles`, {
+    fetch(`${BACKEND}/nominations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
