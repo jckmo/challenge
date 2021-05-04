@@ -45,7 +45,7 @@ class SearchResults extends React.Component {
         {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.nominatedTitles.map(title => {
           return (
-            <div key={uuid()} id={this.asId(title)} className='movie'>
+            <div key={uuid()} id={this.asId(title)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
               <div className='movie-info' key={uuid()}>
                 <p id={`${this.asId(title)}Title`}>{title.title}</p>
                 <p id={`${this.asId(title)}Year`}>{title.year}</p>
