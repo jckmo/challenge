@@ -18,20 +18,41 @@ class SearchResults extends React.Component {
     )
   }
 
+  checkNominations = title => {
+    console.log(title.timesNominated)
+    if (title.timesNominated === 1) {
+      document.querySelector(`#${this.asId(title)}`).remove()
+    } else if (title.timesNominated > 1) {
+      document.querySelector(`#${this.asId(title)}Nominations`).innerText = `Nominations: ${title.timesNominated -= 1}`
+    }
+  }
+
+  asId = title => {
+    let titleArray = title.title.split('')
+    let pullColons = titleArray.filter(char => char !== ':')
+    let pullPoints = pullColons.filter(char => char !== '.')
+    return pullPoints.join('').split(' ').join('')
+  }
+
+  removeNomination = title => {
+    this.props.removeNomination(title)
+    this.checkNominations(title)
+  }
+
   rollNominated = () => {
     return (
       <div className='nominated-titles'>
         {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.nominatedTitles.map(title => {
           return (
-            <div key={uuid()} className='movie'>
+            <div key={uuid()} id={this.asId(title)} className='movie'>
               <div className='movie-info' key={uuid()}>
-                <p>{title.title}</p>
-                <p>{title.year}</p>
-                <p>Nominations: {title.timesNominated}</p>
+                <p id={`${this.asId(title)}Title`}>{title.title}</p>
+                <p id={`${this.asId(title)}Year`}>{title.year}</p>
+                <p id={`${this.asId(title)}Nominations`}>Nominations: {title.timesNominated}</p>
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
-              <button onClick={() => this.props.nominateTitle(title)}>Remove</button>
+              {title.userId.toString() === (sessionStorage.userId.toString()) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null}
             </div>
           )
         })}

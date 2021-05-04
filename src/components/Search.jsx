@@ -5,6 +5,7 @@ import exSearch from '../actions/exSearch.js'
 import nominateTitle from '../actions/nominateTitle.js'
 import fetchPrevNominations from '../actions/fetchPrevNominations.js'
 import logoutUser from '../actions/logoutUser.js'
+import removeNomination from '../actions/removeNomination.js'
 
 import {connect} from 'react-redux'
 
@@ -16,7 +17,6 @@ class Search extends React.Component {
   logoutUser = () => {
     this.props.history.push('/loading')
     this.props.logoutUser()
-    
     this.props.history.push('/')
   }
 
@@ -30,7 +30,7 @@ class Search extends React.Component {
             <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
-        <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles}/>
+        <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles} removeNomination={this.props.removeNomination}/>
       </>
     )
   }
@@ -48,7 +48,8 @@ const mapDispatchToProps = dispatch => {
     exSearch: (x) => dispatch(exSearch(x)),
     nominateTitle: (x) => dispatch(nominateTitle(x)),
     fetchPrevNominations: () => dispatch(fetchPrevNominations()),
-    logoutUser: () => dispatch(logoutUser())
+    logoutUser: () => dispatch(logoutUser()),
+    removeNomination: (x) => dispatch(removeNomination(x))
   }
 }
 
