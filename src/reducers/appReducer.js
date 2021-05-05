@@ -1,4 +1,4 @@
-const appReducer = (state = {currentUser: '', searchTitles: '', nominatedTitles: []}, action) => {
+const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitles: '', allNominatedTitles: []}, action) => {
   switch (action.type) {
     case 'LOGIN': 
       return {
@@ -15,36 +15,45 @@ const appReducer = (state = {currentUser: '', searchTitles: '', nominatedTitles:
         ...state,
         searchTitles: action.titles,
       }
+    case 'USER_TITLE':
+      return {
+        ...state,
+        currentUserTitles: [
+          ...state.currentUserTitles,
+          {
+            title: action.title.title.title,
+            year: action.title.title.year,
+            poster: action.title.title.poster,
+            timesNominated: action.title.times_nominated,
+          }
+        ]
+      }
     case 'NOMINATE':
       return {
         ...state,
-        nominatedTitles: [
-          ...state.nominatedTitles,
+        allNominatedTitles: [
+          ...state.allNominatedTitles,
           {
-            title: action.title.title,
-            year: action.title.year,
-            poster: action.title.poster,
-            nominated: true,
-            timesNominated: action.title.nominations,
-            userId: action.title.user_id
+            title: action.title.title.title,
+            year: action.title.title.year,
+            poster: action.title.title.poster,
+            timesNominated: action.title.times_nominated,
           }
         ]
       }
     case 'REMOVE_NOMINATION':
-      let newTitles = state.nominatedTitles.filter(title => title.tile !== action.title.title)
+      let newTitles = state.allNominatedTitles.filter(title => title.tile !== action.title.title)
 
       newTitles.map(title => {
         return {
           ...state,
           nominatedTitles: [
-            ...state.nominatedTitles,
+            ...state.allNominatedTitles,
             {
               title: action.title.title,
               year: action.title.year,
               poster: action.title.poster,
-              nominated: true,
-              timesNominated: action.title.nominations,
-              userId: action.title.user_id
+              timesNominated: action.title.times_nominated,
             }
           ]
         }

@@ -42,8 +42,8 @@ class SearchResults extends React.Component {
   rollNominated = () => {
     return (
       <div className='nominated-titles'>
-        {this.props.nominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
-        {this.props.nominatedTitles.map(title => {
+        {this.props.allNominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
+        {this.props.allNominatedTitles.map(title => {
           return (
             <div key={uuid()} id={this.asId(title)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
               <div className='movie-info' key={uuid()}>
@@ -52,7 +52,7 @@ class SearchResults extends React.Component {
                 <p id={`${this.asId(title)}Nominations`}>Nominations: {title.timesNominated}</p>
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
-              {title.userId.toString() === (sessionStorage.userId.toString()) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null}
+              {/* {title.userId.toString() === (sessionStorage.userId.toString()) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null} */}
             </div>
           )
         })}

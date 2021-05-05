@@ -30,7 +30,7 @@ class Search extends React.Component {
             <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
-        <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} nominatedTitles={this.props.nominatedTitles} titles={this.props.searchTitles} removeNomination={this.props.removeNomination}/>
+        <SearchResults fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.props.searchTitles} removeNomination={this.props.removeNomination}/>
       </>
     )
   }
@@ -39,7 +39,8 @@ class Search extends React.Component {
 const mapStateToProps = state => {
   return {
     searchTitles: state.searchTitles,
-    nominatedTitles: state.nominatedTitles
+    allNominatedTitles: state.allNominatedTitles,
+    currentUserTitles: state.currentUserTitles
   }
 }
 
