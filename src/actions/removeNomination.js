@@ -2,8 +2,8 @@ import {BACKEND} from '../index.js'
 
 const removeNomination = title => {
   return dispatch => {
-    fetch(`${BACKEND}/titles/${sessionStorage.userId}`, {
-      method: 'PUT',
+    fetch(`${BACKEND}/nominations/1`, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -11,9 +11,6 @@ const removeNomination = title => {
         title: title,
         userId: sessionStorage.userId
       })
-    })
-    .then(() => {
-      dispatch({type: 'REMOVE_NOMINATION', title: title})
     })
   }
 }

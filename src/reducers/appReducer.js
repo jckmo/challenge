@@ -38,23 +38,6 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
           }
         ]
       }
-    case 'REMOVE_NOMINATION':
-      let newTitles = state.allNominatedTitles.filter(title => title.tile !== action.title.title)
-
-      newTitles.map(title => {
-        return {
-          ...state,
-          nominatedTitles: [
-            ...state.allNominatedTitles,
-            {
-              title: action.title.title,
-              year: action.title.year,
-              poster: action.title.poster,
-              timesNominated: action.title.times_nominated,
-            }
-          ]
-        }
-      })
     // eslint-disable-next-line
     default: 
       return state

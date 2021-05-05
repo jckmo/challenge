@@ -15,7 +15,6 @@ class SearchResults extends React.Component {
   }
 
   checkNominations = title => {
-    console.log(title.timesNominated)
     if (title.timesNominated === 1) {
       document.querySelector(`#${this.asId(title)}`).remove()
     } else if (title.timesNominated > 1) {
