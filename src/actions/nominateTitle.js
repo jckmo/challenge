@@ -14,7 +14,8 @@ const nominateTitle = title => {
     })
     .then(response => response.json())
     .then(jsonResponse => {
-      console.log(jsonResponse)
+
+      debugger
       dispatch({type: 'NOMINATE', title: jsonResponse})
     })
   }

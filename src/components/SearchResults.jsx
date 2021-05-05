@@ -15,6 +15,7 @@ class SearchResults extends React.Component {
   }
 
   checkNominations = title => {
+    console.log(title.timesNominated)
     if (title.timesNominated === 1) {
       document.querySelector(`#${this.asId(title)}`).remove()
     } else if (title.timesNominated > 1) {
@@ -50,7 +51,7 @@ class SearchResults extends React.Component {
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
 
-              {this.belongsToUser(title) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null}
+              {!this.belongsToUser(title) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null}
             </div>
           )
         })}
