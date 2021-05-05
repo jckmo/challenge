@@ -35,7 +35,17 @@ class SearchResults extends React.Component {
     this.checkNominations(title)
   }
 
-  belongsToUser = title => !!this.props.currentUserTitles.find(userTitle => userTitle.title === title.title)
+  belongsToUser = (searchTitle, source) => {
+    if (source === 'fromSearch') {
+      return this.props.currentUserTitles.find(title => title.title === searchTitle.Title)
+    } else if (source === 'fromNoms') {
+      return this.props.currentUserTitles.find(title => title.title === searchTitle.title)
+    }
+  }
+
+  isNominated = searchTitle => this.props.allNominatedTitles.find(title => title.title === searchTitle.Title)
+
+  findNominationCount = searchTitle => this.props.allNominatedTitles.find(title => title.title === searchTitle.Title).timesNominated
 
   rollNominated = () => {
     return (
@@ -51,7 +61,7 @@ class SearchResults extends React.Component {
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
 
-              {!this.belongsToUser(title) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null}
+              {!!this.belongsToUser(title, 'fromNoms') ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : <button onClick={() => this.nominateTitle(title)}>Nominate this title</button>}
             </div>
           )
         })}
@@ -64,7 +74,7 @@ class SearchResults extends React.Component {
       <div className='search-results'>
         {this.props.titles === "" ? this.rollNominated() : this.props.titles.map(title => {
           return (
-            <div className='movie' key={uuid()}>
+            <div className={this.isNominated(title) && this.findNominationCount(title) >= 5 ? 'gold-movie' : 'movie'} key={uuid()}>
               <div className='movie-info'>
                   <p key={uuid()}>
                     {title.Title}
@@ -72,10 +82,10 @@ class SearchResults extends React.Component {
                   <p key={uuid()}>
                     {title.Year}
                   </p>
+                  {this.isNominated(title) ? <p key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : null}
                 </div>
-              {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}
-
-              <button onClick={() => this.props.nominateTitle(title)}>Nominate this title</button>
+              {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}    
+              {!this.belongsToUser(title, 'fromSearch') ? <button onClick={() => this.nominateTitle(title)}>Nominate this title</button> : <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> }
             </div>
           )}  
         )}
