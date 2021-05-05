@@ -1,6 +1,6 @@
 import {BACKEND} from '../index.js'
 
-const fetchPrevNominations = () => {
+const fetchPrevUserNominations = () => {
   return dispatch => {
     fetch(`${BACKEND}/nominations/1`, {
       method: 'PUT',
@@ -8,17 +8,17 @@ const fetchPrevNominations = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userId: 0
+        userId: sessionStorage.userId
       })
     })
     .then(response => response.json())
     .then(jsonResponse => {
       // eslint-disable-next-line
       jsonResponse.map(title => {
-        dispatch({type: 'NOMINATE', title: title})
+        dispatch({type: 'USER_TITLE', title: title})
       })
     })
   }
 }
 
-export default fetchPrevNominations
+export default fetchPrevUserNominations

@@ -21,10 +21,7 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
         currentUserTitles: [
           ...state.currentUserTitles,
           {
-            title: action.title.title.title,
-            year: action.title.title.year,
-            poster: action.title.title.poster,
-            timesNominated: action.title.times_nominated,
+            title: action.title.title,
           }
         ]
       }
@@ -62,6 +59,6 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
     default: 
       return state
     }
-}
+  }
 
 export default appReducer

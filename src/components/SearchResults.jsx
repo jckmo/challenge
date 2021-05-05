@@ -4,10 +4,6 @@ import uuid from 'react-uuid'
 
 
 class SearchResults extends React.Component {
-  componentDidMount = () => {
-    this.props.fetchPrevNominations()
-  }
-
   createGenericPoster = title => {
     let splitTitle = title.Title.split(' ')
     let titleFirst = splitTitle[0].split('')[0].toUpperCase()
@@ -39,6 +35,8 @@ class SearchResults extends React.Component {
     this.checkNominations(title)
   }
 
+  belongsToUser = title => !!this.props.currentUserTitles.find(userTitle => userTitle.title === title.title)
+
   rollNominated = () => {
     return (
       <div className='nominated-titles'>
@@ -52,7 +50,8 @@ class SearchResults extends React.Component {
                 <p id={`${this.asId(title)}Nominations`}>Nominations: {title.timesNominated}</p>
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
-              {/* {title.userId.toString() === (sessionStorage.userId.toString()) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null} */}
+
+              {this.belongsToUser(title) ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : null}
             </div>
           )
         })}
