@@ -118,3 +118,9 @@ button[type='submit'] {
 .user-info:hover {
   cursor: pointer;
 }
+
+.password-check {
+  visibility: hidden;
+  margin: 0 0 0 2%;
+  color: darkred
+}

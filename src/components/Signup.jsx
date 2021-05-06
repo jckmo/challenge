@@ -15,6 +15,14 @@ class Signup extends React.Component {
   }
 
   handleInput = (e) => {
+    let pass = document.querySelector('#pass')
+    let confirm = document.querySelector('#confirm')
+    let passCheck = document.querySelector('.password-check')
+
+    passCheck.style.visibility = 'hidden'
+    pass.style.border = ''
+    confirm.style.border = ''
+
     if (e.target.id === 'user') {
       this.setState({
         ...this.state,
@@ -38,7 +46,16 @@ class Signup extends React.Component {
     const checkPassword = (password, confirm) => password === confirm
 
     const reroute = () => {
-      debugger
+      let pass = document.querySelector('#pass')
+      let confirm = document.querySelector('#confirm')
+      let passCheck = document.querySelector('.password-check')
+
+      passCheck.style.visibility = 'visible'
+      pass.style.border = '2px solid darkred'
+      confirm.style.border = '2px solid darkred'
+
+      pass.value = ''
+      confirm.value = ''
     }
 
     const createUser = () => {
@@ -65,7 +82,7 @@ class Signup extends React.Component {
           <label>User Name</label><br/>
           <input id='user' placeholder='User Name'></input><br/>
           <label>Password</label><br/>
-          <input type='password' id='pass' placeholder='Password'></input><br/>
+          <input type='password' id='pass' placeholder='Password'></input><span className='password-check'>Please check passwords</span><br/>
           <label>Confirm Password</label><br/>
           <input type='password' id='confirm' placeholder='Confirm Password'></input><br/>
           <button type='submit'>Signup</button>
