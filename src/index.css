@@ -28,13 +28,12 @@
   margin: 20% 0 0 0;
 }
 
-.movie > button {
-  width: 100%;
-  padding: 2%;
-  margin: 4% 0 4% 0;
+.gold-movie > button, .movie > button {
+  /* width: 50%;
+  /* padding: 2%;
   border-radius: 2%/16%;
   background-color: gray;
-  border: none;
+  border: none; */
   cursor: pointer;
 }
 
@@ -58,7 +57,7 @@
 .poster {
   width: 30%;
   height: 30%;
-  margin: 3% 5% 0 0;
+  margin: 5% 5% 0 0;
   border-radius: 8%/5%;
   border: 2px solid black
 }

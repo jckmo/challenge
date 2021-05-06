@@ -14,25 +14,36 @@ class SearchResults extends React.Component {
     )
   }
 
-  checkNominations = title => {
-    console.log(title.timesNominated)
+  checkNominations = (title, source) => {
     if (title.timesNominated === 1) {
-      document.querySelector(`#${this.asId(title)}`).remove()
+      document.querySelector(`#${this.asId(title, source)}`).remove()
+      this.props.removeNominationFromState(title)
     } else if (title.timesNominated > 1) {
-      document.querySelector(`#${this.asId(title)}Nominations`).innerText = `Nominations: ${title.timesNominated -= 1}`
+      document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: ${title.timesNominated -= 1}`
     }
   }
 
-  asId = title => {
-    let titleArray = title.title.split('')
+  nominateTitle = (title, source) => {
+    this.props.nominateTitle(title)
+    let button = document.querySelector(`button#${this.asId(title, source)}`)
+    button.innerText = 'Remove Your Nomination'
+    button.addEventListener('click', () => this.removeNomination(title, source))
+  }
+
+  asId = (title, source)=> {
+    let titleArray
+    source === 'fromNoms' ? titleArray = title.title.split('') : titleArray = title.Title.split('')
     let pullColons = titleArray.filter(char => char !== ':')
     let pullPoints = pullColons.filter(char => char !== '.')
     return pullPoints.join('').split(' ').join('')
   }
 
-  removeNomination = title => {
+  removeNomination = (title, source) => {
     this.props.removeNomination(title)
-    this.checkNominations(title)
+    let button = document.querySelector(`button#${this.asId(title, source)}`)
+    button.innerHTML = 'Nominate this title'
+    button.addEventListener('click', () => this.nominateTitle(title, source))
+    this.checkNominations(title, source)
   }
 
   belongsToUser = (searchTitle, source) => {
@@ -48,20 +59,22 @@ class SearchResults extends React.Component {
   findNominationCount = searchTitle => this.props.allNominatedTitles.find(title => title.title === searchTitle.Title).timesNominated
 
   rollNominated = () => {
+    let source = 'fromNoms'
     return (
       <div className='nominated-titles'>
         {this.props.allNominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.allNominatedTitles.map(title => {
+          // debugger
           return (
-            <div key={uuid()} id={this.asId(title)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
+            <div key={uuid()} id={this.asId(title, source)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
               <div className='movie-info' key={uuid()}>
-                <p id={`${this.asId(title)}Title`}>{title.title}</p>
-                <p id={`${this.asId(title)}Year`}>{title.year}</p>
-                <p id={`${this.asId(title)}Nominations`}>Nominations: {title.timesNominated}</p>
+                <p id={`${this.asId(title, source)}Title`}>{title.title}</p>
+                <p id={`${this.asId(title, source)}Year`}>{title.year}</p>
+                <p id={`${this.asId(title, source)}Nominations`}>Nominations: {title.timesNominated}</p>
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
 
-              {!!this.belongsToUser(title, 'fromNoms') ? <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> : <button onClick={() => this.nominateTitle(title)}>Nominate this title</button>}
+              {!!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.removeNomination(title, source)}>Remove Your Nomination</button> : <button  id={this.asId(title, source)} onClick={() => this.nominateTitle(title, source)}>Nominate this title</button>}
             </div>
           )
         })}
@@ -70,22 +83,23 @@ class SearchResults extends React.Component {
   }
 
   render() {
+    let source = 'fromSearch'
     return (
       <div className='search-results'>
         {this.props.titles === "" ? this.rollNominated() : this.props.titles.map(title => {
           return (
             <div className={this.isNominated(title) && this.findNominationCount(title) >= 5 ? 'gold-movie' : 'movie'} key={uuid()}>
               <div className='movie-info'>
-                  <p key={uuid()}>
+                  <p id={this.asId(title, source)}key={uuid()}>
                     {title.Title}
                   </p>
-                  <p key={uuid()}>
+                  <p id={this.asId(title, source)}key={uuid()}>
                     {title.Year}
                   </p>
                   {this.isNominated(title) ? <p key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : null}
                 </div>
               {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}    
-              {!this.belongsToUser(title, 'fromSearch') ? <button onClick={() => this.nominateTitle(title)}>Nominate this title</button> : <button onClick={() => this.removeNomination(title)}>Remove Your Nomination</button> }
+              {!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.nominateTitle(title, source)}>Nominate this title</button> : <button id={this.asId(title, source)} onClick={() => this.removeNomination(title, source)}>Remove Your Nomination</button> }
             </div>
           )}  
         )}
