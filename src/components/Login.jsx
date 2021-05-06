@@ -1,6 +1,7 @@
 import React from 'react'
-
 import login from '../actions/login.js'
+import fetchPrevNominations from '../actions/fetchPrevNominations.js'
+import fetchPrevUserNominations from '../actions/fetchPrevUserNominations.js'
 import {connect} from 'react-redux'
 
 
@@ -35,7 +36,11 @@ class Login extends React.Component {
       userName: '',
       password: ''
     })
-    this.props.history.push('/app')
+    this.props.fetchPrevNominations()
+    this.props.fetchPrevUserNominations()
+    setTimeout(() => {
+        this.props.history.push('/app')
+      }, 500);
   }
 
   render() {
@@ -57,7 +62,9 @@ class Login extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (x,y) => dispatch(login(x,y))
+    login: (x,y) => dispatch(login(x,y)),
+    fetchPrevNominations: () => dispatch(fetchPrevNominations()),
+    fetchPrevUserNominations: () => dispatch(fetchPrevUserNominations())
   }
 }
 
