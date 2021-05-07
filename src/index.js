@@ -17,9 +17,9 @@ import appReducer from './reducers/appReducer.js'
 const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
 
 // dev
-// const BACKEND = `http://localhost:3001`
+const BACKEND = `http://localhost:3001`
 // prod
-const BACKEND = `https://omdbs-search.herokuapp.com`
+// const BACKEND = `https://omdbs-search.herokuapp.com`
 
 
 const store = createStore(appReducer, applyMiddleware(thunk))
@@ -30,7 +30,7 @@ ReactDOM.render(
       <Route exact path='/' component={Signup}/>
       <Route exact path='/login' component={Login}/>
       <Route exact path='/loading' component={Loading}/>
-      <Route exact path='/app' component={Search}/>
+      <Route path='/app' component={Search}/>
     </Router>
   </Provider>
   ,document.getElementById('root')

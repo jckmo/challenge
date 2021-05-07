@@ -53,7 +53,7 @@ class SearchResults extends React.Component {
               </div>
               <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
 
-              {!!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.removeNomination(title, source)}>Remove Your Nomination</button> : <button  id={this.asId(title, source)} onClick={() => this.nominateTitle(title, source)}>Nominate this title</button>}
+              {!!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.props.removeNomination(title, source)}>Remove Your Nomination</button> : <button  id={this.asId(title, source)} onClick={() => this.props.nominateTitle(title, source)}>Nominate this title</button>}
             </div>
           )
         })}
@@ -78,7 +78,7 @@ class SearchResults extends React.Component {
                   {this.isNominated(title, source) ? <p id={`${this.asId(title, source)}Nominations`} key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : <p id={`${this.asId(title, source)}Nominations`} key={uuid()}></p>}
                 </div>
               {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}    
-              {!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.nominateTitle(title, source)}>Nominate this title</button> : <button id={this.asId(title, source)} onClick={() => this.removeNomination(title, source)}>Remove Your Nomination</button> }
+              {!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.props.nominateTitle(title, source)}>Nominate this title</button> : <button id={this.asId(title, source)} onClick={() => this.props.removeNomination(title, source)}>Remove Your Nomination</button> }
             </div>
           )}  
         )}

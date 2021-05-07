@@ -21,17 +21,17 @@ class Search extends React.Component {
   }
 
   nominateTitle = (title, source) => {
+    this.props.history.push('/app')
     this.props.nominateTitleState(title, source)
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
-    this.props.history.push('/')
   }
   
   removeNomination = (title, source) => {
+    this.props.history.push('/app')
     this.props.removeNominationState(title, source)
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
-    this.props.history.push('/')
   }
 
   logoutUser = () => {
@@ -50,7 +50,7 @@ class Search extends React.Component {
             <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
-        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.searchTitles} removeNomination={this.removeNomination}/>
+        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.props.searchTitles} removeNomination={this.removeNomination}/>
       </>
     )
   }

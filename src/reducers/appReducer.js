@@ -11,6 +11,7 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
         currentUser: ''
       }
     case 'UPDATE_SEARCH':
+      debugger
       return {
         ...state,
         searchTitles: action.titles,

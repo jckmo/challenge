@@ -16,7 +16,7 @@ class Login extends React.Component {
 
   componentDidMount = () => {
     // eslint-disable-next-line
-    sessionStorage.length === 1 ? this.props.history.push('/app') : null
+    sessionStorage.length === 1 ? setTimeout(() => this.props.history.push('/app'), 1000) : null
   }
 
   handleInput = (e) => {
