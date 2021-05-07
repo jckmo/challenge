@@ -14,6 +14,10 @@ class Login extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    sessionStorage.length === 1 ? this.props.history.push('/app') : null
+  }
+
   handleInput = (e) => {
     if (e.target.id === 'user') {
       this.setState({
