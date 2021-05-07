@@ -13,6 +13,18 @@ const removeNomination = (title, source) => {
         source: source
       })
     })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      dispatch({type: 'RESET_TITLES', action: {}})
+      // eslint-disable-next-line
+      jsonResponse.current_user_nominations.map(title => {
+        dispatch({type: 'UPDATE_USER_TITLES', title: title})
+      })
+      // eslint-disable-next-line
+      jsonResponse.nominated_titles.map(title => {
+        dispatch({type: 'UPDATE_NOMINATIONS', title: title})
+      })
+    })
   }
 }
 

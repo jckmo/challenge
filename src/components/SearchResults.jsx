@@ -1,6 +1,5 @@
 import React from 'react'
 import uuid from 'react-uuid'
-// import Banner from 'react-js-banner'
 
 
 class SearchResults extends React.Component {
@@ -14,20 +13,42 @@ class SearchResults extends React.Component {
     )
   }
 
-  checkNominations = (title, source) => {
-    if (title.timesNominated === 1) {
-      document.querySelector(`#${this.asId(title, source)}`).remove()
-      this.props.removeNominationFromState(title)
-    } else if (title.timesNominated > 1) {
-      document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: ${title.timesNominated -= 1}`
+  checkNominations = (title, source, addOrRemove) => {
+    if (addOrRemove === "remove") {  
+      if (title.timesNominated === 1) {
+        document.querySelector(`#${this.asId(title, source)}`).remove()
+      } else if (title.timesNominated > 1) {
+        document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: ${title.timesNominated -= 1}`
+        if ((this.props.allNominatedTitles.find(titleToFind => titleToFind.title === title.title).timesNominated -1) < 5) {
+          document.querySelector(`#${this.asId(title, source)}`).className = 'movie'
+        }
+      }
+    } else if (addOrRemove === 'add') {
+      if (this.isNominated(title, source)) {
+        document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: ${title.timesNominated += 1}`
+        if ((this.props.allNominatedTitles.find(titleToFind => titleToFind.title === title.title).timesNominated +1) >= 5) {
+          document.querySelector(`#${this.asId(title, source)}`).className = 'gold-movie'
+        }
+      } else {
+        document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: 1`
+      }
     }
   }
 
   nominateTitle = (title, source) => {
     this.props.nominateTitle(title, source)
     let button = document.querySelector(`button#${this.asId(title, source)}`)
-    button.innerText = 'Remove Your Nomination'
-    button.addEventListener('click', () => this.removeNomination(title, source))
+    // button.innerText = 'Remove Your Nomination'
+    // button.addEventListener('click', () => this.removeNomination(title, source))
+    this.checkNominations(title, source, "add")
+  }
+
+  removeNomination = (title, source) => {
+    this.props.removeNomination(title, source)
+    let button = document.querySelector(`button#${this.asId(title, source)}`)
+    button.innerHTML = 'Nominate this title'
+    button.addEventListener('click', () => this.nominateTitle(title, source))
+    this.checkNominations(title, source, "remove")
   }
 
   asId = (title, source)=> {
@@ -38,14 +59,6 @@ class SearchResults extends React.Component {
     return pullPoints.join('').split(' ').join('')
   }
 
-  removeNomination = (title, source) => {
-    this.props.removeNomination(title, source)
-    let button = document.querySelector(`button#${this.asId(title, source)}`)
-    button.innerHTML = 'Nominate this title'
-    button.addEventListener('click', () => this.nominateTitle(title, source))
-    this.checkNominations(title, source)
-  }
-
   belongsToUser = (searchTitle, source) => {
     if (source === 'fromSearch') {
       return this.props.currentUserTitles.find(title => title.title === searchTitle.Title)
@@ -54,9 +67,9 @@ class SearchResults extends React.Component {
     }
   }
 
-  isNominated = searchTitle => this.props.allNominatedTitles.find(title => title.title === searchTitle.Title)
+  isNominated = (searchTitle, source) => source === 'fromNoms' ? this.props.allNominatedTitles.find(title => title.title === searchTitle.title) : this.props.allNominatedTitles.find(title => title.title === searchTitle.Title)
 
-  findNominationCount = searchTitle => this.props.allNominatedTitles.find(title => title.title === searchTitle.Title).timesNominated
+  findNominationCount = (searchTitle, source) => source === 'fromNoms' ? this.props.allNominatedTitles.find(title => title.title === searchTitle.title).timesNominated : this.props.allNominatedTitles.find(title => title.title === searchTitle.Title).timesNominated
 
   rollNominated = () => {
     let source = 'fromNoms'
@@ -88,7 +101,7 @@ class SearchResults extends React.Component {
       <div className='search-results'>
         {this.props.titles === "" ? this.rollNominated() : this.props.titles.map(title => {
           return (
-            <div className={this.isNominated(title) && this.findNominationCount(title) >= 5 ? 'gold-movie' : 'movie'} key={uuid()}>
+            <div className={this.isNominated(title, source) && this.findNominationCount(title) >= 5 ? 'gold-movie' : 'movie'} key={uuid()}>
               <div className='movie-info'>
                   <p id={this.asId(title, source)}key={uuid()}>
                     {title.Title}
@@ -96,7 +109,7 @@ class SearchResults extends React.Component {
                   <p id={this.asId(title, source)}key={uuid()}>
                     {title.Year}
                   </p>
-                  {this.isNominated(title) ? <p key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : null}
+                  {this.isNominated(title, source) ? <p id={`${this.asId(title, source)}Nominations`} key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : <p id={`${this.asId(title, source)}Nominations`} key={uuid()}></p>}
                 </div>
               {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}    
               {!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.nominateTitle(title, source)}>Nominate this title</button> : <button id={this.asId(title, source)} onClick={() => this.removeNomination(title, source)}>Remove Your Nomination</button> }
