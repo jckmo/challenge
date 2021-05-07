@@ -22,6 +22,7 @@ class SearchResults extends React.Component {
     this.props.nominateTitle(title, source)
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
+    debugger
     this.props.history.push('/')
   }
   
@@ -29,6 +30,7 @@ class SearchResults extends React.Component {
     this.props.removeNomination(title, source)
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
+    debugger
     this.props.history.push('/')
   }
 
