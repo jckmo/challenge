@@ -40,7 +40,7 @@ class Login extends React.Component {
     this.props.fetchPrevUserNominations()
     setTimeout(() => {
         this.props.history.push('/app')
-      }, 500);
+      }, 1000);
   }
 
   render() {
