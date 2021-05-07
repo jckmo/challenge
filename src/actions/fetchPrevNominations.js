@@ -13,6 +13,7 @@ const fetchPrevNominations = () => {
     })
     .then(response => response.json())
     .then(jsonResponse => {
+      dispatch({type: 'RESET_NOMINATED_TITLES', action: {}})
       // eslint-disable-next-line
       jsonResponse.map(title => {
         dispatch({type: 'NOMINATE', title: title})

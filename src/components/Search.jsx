@@ -15,6 +15,7 @@ class Search extends React.Component {
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
   }
+  
   handleInput = title => {
     this.props.exSearch(title)
   }
@@ -35,7 +36,7 @@ class Search extends React.Component {
             <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
-        <SearchResults nominateTitle={this.props.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.props.searchTitles} removeNomination={this.props.removeNomination}/>
+        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.props.searchTitles} removeNomination={this.props.removeNomination}/>
       </>
     )
   }

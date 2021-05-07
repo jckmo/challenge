@@ -35,6 +35,7 @@
   background-color: gray;
   border: none; */
   cursor: pointer;
+  visibility: visible;
 }
 
 .gold-movie, .movie {

@@ -13,6 +13,7 @@ const fetchPrevUserNominations = () => {
     })
     .then(response => response.json())
     .then(jsonResponse => {
+      dispatch({type: 'RESET_USER_TITLES', action: {}})
       // eslint-disable-next-line
       jsonResponse.map(title => {
         dispatch({type: 'USER_TITLE', title: title})

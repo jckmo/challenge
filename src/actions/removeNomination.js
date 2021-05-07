@@ -15,14 +15,14 @@ const removeNomination = (title, source) => {
     })
     .then(response => response.json())
     .then(jsonResponse => {
-      dispatch({type: 'RESET_TITLES', action: {}})
+      dispatch({type: 'RESET_ALL', action: {}})
       // eslint-disable-next-line
       jsonResponse.current_user_nominations.map(title => {
-        dispatch({type: 'UPDATE_USER_TITLES', title: title})
+        dispatch({type: 'USER_TITLE', title: title})
       })
       // eslint-disable-next-line
       jsonResponse.nominated_titles.map(title => {
-        dispatch({type: 'UPDATE_NOMINATIONS', title: title})
+        dispatch({type: 'NOMINATE', title: title})
       })
     })
   }

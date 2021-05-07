@@ -38,45 +38,35 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
           }
         ]
       }
-    case 'REMOVE_NOMINATION':
+    // case 'REMOVE_NOMINATION':
+    //   return {
+    //     ...state,
+    //     allNominatedTitles: [
+    //       state.allNominatedTitles.filter(title => title.title !== action.title.title)
+    //     ],
+    //     currentUserTitles: [
+    //       state.currentUserTitles.filter(title => title.title !== action.title.title)
+    //     ]
+    //   }
+    case 'RESET_NOMINATED_TITLES': 
       return {
         ...state,
-        allNominatedTitles: [
-          state.allNominatedTitles.filter(title => title.title !== action.title.title)
-        ],
-        currentUserTitles: [
-          state.currentUserTitles.filter(title => title.title !== action.title.title)
-        ]
+        searchTitles: '',
+        allNominatedTitles: []
       }
-    case 'UPDATE_NOMINATIONS': 
+    case 'RESET_USER_TITLES':
       return {
         ...state,
-        allNominatedTitles: [
-          ...state.allNominatedTitles,
-          {
-            title: action.title.title.title,
-            year: action.title.title.year,
-            poster: action.title.title.poster,
-            timesNominated: action.title.times_nominated,
-          }
-        ]
+        searchTitles: '',
+        currentUserTitles: []
       }
-      case 'UPDATE_USER_TITLES':
-        return {
-          ...state,
-          currentUserTitles: [
-            ...state.currentUserTitles,
-            {
-              title: action.title.title.title,
-            }
-          ]
-        }
-      case 'RESET_TITLES': 
-        return {
-          searchTitles: '',
-          currentUserTitles: [],
-          allNominatedTitles: []
-        }
+    case 'RESET_ALL':
+      return {
+        ...state,
+        searchTitles: '',
+        currentUserTitles: [],
+        allNominatedTitles: []
+      }
     // eslint-disable-next-line
     default: 
       return state

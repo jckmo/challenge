@@ -3,6 +3,11 @@ import uuid from 'react-uuid'
 
 
 class SearchResults extends React.Component {
+  componentDidMount = () => {
+    this.props.fetchPrevNominations()
+    this.props.fetchPrevUserNominations()
+  }
+
   createGenericPoster = title => {
     let splitTitle = title.Title.split(' ')
     let titleFirst = splitTitle[0].split('')[0].toUpperCase()
@@ -12,43 +17,17 @@ class SearchResults extends React.Component {
       </div>
     )
   }
-
-  checkNominations = (title, source, addOrRemove) => {
-    if (addOrRemove === "remove") {  
-      if (title.timesNominated === 1) {
-        document.querySelector(`#${this.asId(title, source)}`).remove()
-      } else if (title.timesNominated > 1) {
-        document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: ${title.timesNominated -= 1}`
-        if ((this.props.allNominatedTitles.find(titleToFind => titleToFind.title === title.title).timesNominated -1) < 5) {
-          document.querySelector(`#${this.asId(title, source)}`).className = 'movie'
-        }
-      }
-    } else if (addOrRemove === 'add') {
-      if (this.isNominated(title, source)) {
-        document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: ${title.timesNominated += 1}`
-        if ((this.props.allNominatedTitles.find(titleToFind => titleToFind.title === title.title).timesNominated +1) >= 5) {
-          document.querySelector(`#${this.asId(title, source)}`).className = 'gold-movie'
-        }
-      } else {
-        document.querySelector(`#${this.asId(title, source)}Nominations`).innerText = `Nominations: 1`
-      }
-    }
-  }
-
+  
   nominateTitle = (title, source) => {
     this.props.nominateTitle(title, source)
-    let button = document.querySelector(`button#${this.asId(title, source)}`)
-    // button.innerText = 'Remove Your Nomination'
-    // button.addEventListener('click', () => this.removeNomination(title, source))
-    this.checkNominations(title, source, "add")
+    this.props.fetchPrevNominations()
+    this.props.fetchPrevUserNominations()
   }
-
+  
   removeNomination = (title, source) => {
     this.props.removeNomination(title, source)
-    let button = document.querySelector(`button#${this.asId(title, source)}`)
-    button.innerHTML = 'Nominate this title'
-    button.addEventListener('click', () => this.nominateTitle(title, source))
-    this.checkNominations(title, source, "remove")
+    this.props.fetchPrevNominations()
+    this.props.fetchPrevUserNominations()
   }
 
   asId = (title, source)=> {
@@ -77,7 +56,6 @@ class SearchResults extends React.Component {
       <div className='nominated-titles'>
         {this.props.allNominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
         {this.props.allNominatedTitles.map(title => {
-          // debugger
           return (
             <div key={uuid()} id={this.asId(title, source)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
               <div className='movie-info' key={uuid()}>
