@@ -20,6 +20,20 @@ class Search extends React.Component {
     this.props.exSearch(title)
   }
 
+  nominateTitle = (title, source) => {
+    this.props.nominateTitleState(title, source)
+    this.props.fetchPrevNominations()
+    this.props.fetchPrevUserNominations()
+    this.props.history.push('/')
+  }
+  
+  removeNomination = (title, source) => {
+    this.props.removeNominationState(title, source)
+    this.props.fetchPrevNominations()
+    this.props.fetchPrevUserNominations()
+    this.props.history.push('/')
+  }
+
   logoutUser = () => {
     this.props.history.push('/loading')
     this.props.logoutUser()
@@ -36,7 +50,7 @@ class Search extends React.Component {
             <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
-        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.props.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.props.searchTitles} removeNomination={this.props.removeNomination}/>
+        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={() => this.nominateTitle(x,y)} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.searchTitles} removeNomination={() => this.props.removeNomination(x,y)}/>
       </>
     )
   }
@@ -53,11 +67,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     exSearch: (x) => dispatch(exSearch(x)),
-    nominateTitle: (x,y) => dispatch(nominateTitle(x,y)),
+    nominateTitleState: (x,y) => dispatch(nominateTitle(x,y)),
     fetchPrevNominations: () => dispatch(fetchPrevNominations()),
     fetchPrevUserNominations: () => dispatch(fetchPrevUserNominations()),
     logoutUser: () => dispatch(logoutUser()),
-    removeNomination: (x,y) => dispatch(removeNomination(x,y))
+    removeNominationState: (x,y) => dispatch(removeNomination(x,y))
   }
 }
 

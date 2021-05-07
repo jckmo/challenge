@@ -17,22 +17,6 @@ class SearchResults extends React.Component {
       </div>
     )
   }
-  
-  nominateTitle = (title, source) => {
-    this.props.nominateTitle(title, source)
-    this.props.fetchPrevNominations()
-    this.props.fetchPrevUserNominations()
-    debugger
-    this.props.history.push('/')
-  }
-  
-  removeNomination = (title, source) => {
-    this.props.removeNomination(title, source)
-    this.props.fetchPrevNominations()
-    this.props.fetchPrevUserNominations()
-    debugger
-    this.props.history.push('/')
-  }
 
   asId = (title, source)=> {
     let titleArray
