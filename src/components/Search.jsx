@@ -50,7 +50,7 @@ class Search extends React.Component {
             <div className='user-info' onClick={(x) => this.logoutUser(this)}>Logout</div>
           </div>
         </div>    
-        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={() => this.nominateTitle(x,y)} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.searchTitles} removeNomination={() => this.props.removeNomination(x,y)}/>
+        <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.nominateTitle(x,y)} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.searchTitles} removeNomination={this.removeNomination(x,y)}/>
       </>
     )
   }
