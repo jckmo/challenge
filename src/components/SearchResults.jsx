@@ -23,6 +23,9 @@ class SearchResults extends React.Component {
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
     document.querySelector(`button#${this.asId(title, source)}`).innerText = ''
+    setTimeout(() => {
+      return null
+    }, 1000);
   }
   
   removeNomination = (title, source) => {
@@ -30,6 +33,9 @@ class SearchResults extends React.Component {
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
     document.querySelector(`button#${this.asId(title, source)}`).innerText = ''
+    setTimeout(() => {
+      return null
+    }, 1000);
   }
 
   asId = (title, source)=> {
