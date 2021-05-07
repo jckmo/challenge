@@ -15,6 +15,7 @@ class Login extends React.Component {
   }
 
   componentDidMount = () => {
+    // eslint-disable-next-line
     sessionStorage.length === 1 ? this.props.history.push('/app') : null
   }
 
