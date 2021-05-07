@@ -22,12 +22,14 @@ class SearchResults extends React.Component {
     this.props.nominateTitle(title, source)
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
+    document.querySelector(`button#${this.asId(title, source)}`).innerText = ''
   }
   
   removeNomination = (title, source) => {
     this.props.removeNomination(title, source)
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
+    document.querySelector(`button#${this.asId(title, source)}`).innerText = ''
   }
 
   asId = (title, source)=> {
