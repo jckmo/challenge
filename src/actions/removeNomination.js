@@ -1,6 +1,6 @@
 import {BACKEND} from '../index.js'
 
-const removeNomination = title => {
+const removeNomination = (title, source) => {
   return dispatch => {
     fetch(`${BACKEND}/nominations/1`, {
       method: 'DELETE',
@@ -9,7 +9,8 @@ const removeNomination = title => {
       },
       body: JSON.stringify({
         title: title,
-        userId: sessionStorage.userId
+        userId: sessionStorage.userId,
+        source: source
       })
     })
   }

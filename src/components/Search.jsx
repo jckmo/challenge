@@ -52,11 +52,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     exSearch: (x) => dispatch(exSearch(x)),
-    nominateTitle: (x) => dispatch(nominateTitle(x)),
+    nominateTitle: (x,y) => dispatch(nominateTitle(x,y)),
     fetchPrevNominations: () => dispatch(fetchPrevNominations()),
     fetchPrevUserNominations: () => dispatch(fetchPrevUserNominations()),
     logoutUser: () => dispatch(logoutUser()),
-    removeNomination: (x) => dispatch(removeNomination(x))
+    removeNomination: (x,y) => dispatch(removeNomination(x,y))
   }
 }
 

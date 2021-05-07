@@ -24,7 +24,7 @@ class SearchResults extends React.Component {
   }
 
   nominateTitle = (title, source) => {
-    this.props.nominateTitle(title)
+    this.props.nominateTitle(title, source)
     let button = document.querySelector(`button#${this.asId(title, source)}`)
     button.innerText = 'Remove Your Nomination'
     button.addEventListener('click', () => this.removeNomination(title, source))
@@ -39,7 +39,7 @@ class SearchResults extends React.Component {
   }
 
   removeNomination = (title, source) => {
-    this.props.removeNomination(title)
+    this.props.removeNomination(title, source)
     let button = document.querySelector(`button#${this.asId(title, source)}`)
     button.innerHTML = 'Nominate this title'
     button.addEventListener('click', () => this.nominateTitle(title, source))

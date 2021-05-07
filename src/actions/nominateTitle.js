@@ -1,6 +1,6 @@
 import {BACKEND} from '../index.js'
 
-const nominateTitle = title => {
+const nominateTitle = (title, source) => {
   return dispatch => {
     fetch(`${BACKEND}/nominations`, {
       method: 'POST',
@@ -9,13 +9,12 @@ const nominateTitle = title => {
       },
       body: JSON.stringify({
         title: title,
-        userId: sessionStorage.userId
+        userId: sessionStorage.userId,
+        source: source
       })
     })
     .then(response => response.json())
     .then(jsonResponse => {
-
-      debugger
       dispatch({type: 'NOMINATE', title: jsonResponse})
     })
   }
