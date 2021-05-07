@@ -12,8 +12,12 @@ import {connect} from 'react-redux'
 
 class Search extends React.Component {
   componentDidMount = () => {
-    this.props.fetchPrevNominations()
-    this.props.fetchPrevUserNominations()
+    if (sessionStorage.length !== 1) {
+      this.props.history.push('/')
+    } else {
+      this.props.fetchPrevNominations()
+      this.props.fetchPrevUserNominations()
+    }
   }
   
   handleInput = title => {
