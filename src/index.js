@@ -8,7 +8,6 @@ import Signup from './components/Signup.jsx'
 import Search from './components/Search.jsx'
 
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import {browserHistory, IndexRoute} from 'react-router'
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
@@ -27,12 +26,11 @@ const store = createStore(appReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <IndexRoute component={Search}/>
+    <Router>
       <Route exact path='/' component={Signup}/>
       <Route exact path='/login' component={Login}/>
-      <Route path='/loading' component={Loading}/>
-      <Route path='/app' component={Search}/>
+      <Route exact path='/loading' component={Loading}/>
+      <Route exact path='/app' component={Search}/>
     </Router>
   </Provider>
   ,document.getElementById('root')
