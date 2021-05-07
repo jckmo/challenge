@@ -14,6 +14,11 @@ class Signup extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    // eslint-disable-next-line
+    sessionStorage.length === 1 ? this.props.history.push('/app') : null
+  }
+
   handleInput = (e) => {
     let pass = document.querySelector('#pass')
     let confirm = document.querySelector('#confirm')
