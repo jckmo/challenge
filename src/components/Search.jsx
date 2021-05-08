@@ -40,7 +40,7 @@ class Search extends React.Component {
       sessionStorage.clear()
       this.props.logoutUser()
       this.props.history.push('/')
-    }, 2000);
+    }, 1000);
   }
 
   render() {
