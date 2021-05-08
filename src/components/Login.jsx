@@ -43,9 +43,6 @@ class Login extends React.Component {
     })
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
-    setTimeout(() => {
-        this.props.history.push('/app')
-      }, 1000);
   }
 
   render() {
