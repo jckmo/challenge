@@ -49,10 +49,14 @@
     font-weight: 700;
   }
   
-  .poster, .generic-poster {
+  .poster {
     margin: 0;
     height: 50%;
     width: 65%;
+  }
+  
+  .generic-poster {
+    height: 110px;
   }
 }
 @media screen and (min-width: 565px) and (max-width: 674px) {
@@ -114,9 +118,13 @@
     font-weight: 700;
   }
 
-  .poster, .generic-poster {
+  .poster {
     width: 150px;
     height: 225px;
+  }
+
+  .generic-poster {
+    height: 110px;
   }
 
   .gold-movie > button, .movie > button {
