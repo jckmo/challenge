@@ -54,9 +54,10 @@
     height: 50%;
     width: 65%;
   }
-  
+
   .generic-poster {
     height: 110px;
+    width: 150px;
   }
 }
 @media screen and (min-width: 565px) and (max-width: 674px) {
@@ -125,6 +126,7 @@
 
   .generic-poster {
     height: 110px;
+    width: 150px;
   }
 
   .gold-movie > button, .movie > button {
