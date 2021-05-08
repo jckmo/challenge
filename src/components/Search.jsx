@@ -42,7 +42,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <>
+      <div className='search-container'>
         <div className='search'>
             <label>OMDB Search</label><br/>
           <div className='search-bar'>
@@ -51,7 +51,7 @@ class Search extends React.Component {
           </div>
         </div>    
         <SearchResults fetchPrevUserNominations={this.props.fetchPrevNominations} fetchPrevNominations={this.props.fetchPrevNominations} nominateTitle={this.nominateTitle} allNominatedTitles={this.props.allNominatedTitles} currentUserTitles={this.props.currentUserTitles} titles={this.props.searchTitles} removeNomination={this.removeNomination}/>
-      </>
+      </div>
     )
   }
 }

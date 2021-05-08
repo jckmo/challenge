@@ -5,7 +5,7 @@ class Loading extends React.Component {
   render() {
     return (
       <div>
-        <Skeleton rows={50}/>
+        <Skeleton rows={75}/>
       </div>
     )
   }

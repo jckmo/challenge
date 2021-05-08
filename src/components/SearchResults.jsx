@@ -41,22 +41,50 @@ class SearchResults extends React.Component {
   rollNominated = () => {
     let source = 'fromNoms'
     return (
-      <div className='nominated-titles'>
+      <div className='nominated-titles-container'>
         {this.props.allNominatedTitles.length === 0 ? <h2>No Titles Nominated Yet</h2> : <h2>Nominated Titles</h2>}
-        {this.props.allNominatedTitles.map(title => {
-          return (
-            <div key={uuid()} id={this.asId(title, source)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
-              <div className='movie-info' key={uuid()}>
-                <p id={`${this.asId(title, source)}Title`}>{title.title}</p>
-                <p id={`${this.asId(title, source)}Year`}>{title.year}</p>
-                <p id={`${this.asId(title, source)}Nominations`}>Nominations: {title.timesNominated}</p>
-              </div>
-              <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
+        <div className='nominated-titles'>
+          {this.props.allNominatedTitles.map(title => {
+            return (
+              <div key={uuid()} id={this.asId(title, source)} className={title.timesNominated >= 5 ? 'gold-movie' : 'movie'}>
+                <div className='movie-info' key={uuid()}>
+                  <p id={`${this.asId(title, source)}Title`}>{title.title}</p>
+                  <p id={`${this.asId(title, source)}Year`}>{title.year}</p>
+                  <p id={`${this.asId(title, source)}Nominations`}>Nominations: {title.timesNominated}</p>
+                </div>
+                <img src={title.poster} alt={`poster for ${title.title}`} className='poster'/>
 
-              {!!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.props.removeNomination(title, source)}>Remove Your Nomination</button> : <button  id={this.asId(title, source)} onClick={() => this.props.nominateTitle(title, source)}>Nominate this title</button>}
-            </div>
-          )
-        })}
+                {!!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.props.removeNomination(title, source)}>Remove Your Nomination</button> : <button  id={this.asId(title, source)} onClick={() => this.props.nominateTitle(title, source)}>Nominate this title</button>}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
+  showSearch = source => {
+    return (
+      <div className='search-results-container'>
+        <div className='search-results'>
+          {this.props.titles.map(title => {
+            return (
+              <div className={this.isNominated(title, source) && this.findNominationCount(title) >= 5 ? 'gold-movie' : 'movie'} key={uuid()}>
+                <div className='movie-info'>
+                    <p id={this.asId(title, source)}key={uuid()}>
+                      {title.Title}
+                    </p>
+                    <p id={this.asId(title, source)}key={uuid()}>
+                      {title.Year}
+                    </p>
+                    {this.isNominated(title, source) ? <p id={`${this.asId(title, source)}Nominations`} key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : <p id={`${this.asId(title, source)}Nominations`} key={uuid()}></p>}
+                  </div>
+                {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}    
+                {!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.props.nominateTitle(title, source)}>Nominate this title</button> : <button id={this.asId(title, source)} onClick={() => this.props.removeNomination(title, source)}>Remove Your Nomination</button> }
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
@@ -64,25 +92,9 @@ class SearchResults extends React.Component {
   render() {
     let source = 'fromSearch'
     return (
-      <div className='search-results'>
-        {this.props.titles === "" ? this.rollNominated() : this.props.titles.map(title => {
-          return (
-            <div className={this.isNominated(title, source) && this.findNominationCount(title) >= 5 ? 'gold-movie' : 'movie'} key={uuid()}>
-              <div className='movie-info'>
-                  <p id={this.asId(title, source)}key={uuid()}>
-                    {title.Title}
-                  </p>
-                  <p id={this.asId(title, source)}key={uuid()}>
-                    {title.Year}
-                  </p>
-                  {this.isNominated(title, source) ? <p id={`${this.asId(title, source)}Nominations`} key={uuid()}>Nominations: {this.findNominationCount(title)}</p> : <p id={`${this.asId(title, source)}Nominations`} key={uuid()}></p>}
-                </div>
-              {title.Poster === "N/A" ? this.createGenericPoster(title) : <img alt={`poster for ${title.Title}`} src={title.Poster} className='poster'/>}    
-              {!this.belongsToUser(title, source) ? <button id={this.asId(title, source)} onClick={() => this.props.nominateTitle(title, source)}>Nominate this title</button> : <button id={this.asId(title, source)} onClick={() => this.props.removeNomination(title, source)}>Remove Your Nomination</button> }
-            </div>
-          )}  
-        )}
-      </div>
+      <>
+        {this.props.titles === "" ? this.rollNominated() : this.showSearch(source)}  
+      </>
     )
   }
 }

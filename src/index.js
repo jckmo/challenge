@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './stylesheets/index.css';
+import './stylesheets/media-queries.scss';
 
 import Login from './components/Login.jsx'
 import Loading from './components/Loading.jsx'
@@ -17,9 +18,9 @@ import appReducer from './reducers/appReducer.js'
 const API = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
 
 // dev
-// const BACKEND = `http://localhost:3001`
+const BACKEND = `http://localhost:3001`
 // prod
-const BACKEND = `https://omdbs-search.herokuapp.com`
+// const BACKEND = `https://omdbs-search.herokuapp.com`
 
 
 const store = createStore(appReducer, applyMiddleware(thunk))

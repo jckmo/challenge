@@ -11,7 +11,6 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
         currentUser: ''
       }
     case 'UPDATE_SEARCH':
-      debugger
       return {
         ...state,
         searchTitles: action.titles,
@@ -39,16 +38,6 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
           }
         ]
       }
-    // case 'REMOVE_NOMINATION':
-    //   return {
-    //     ...state,
-    //     allNominatedTitles: [
-    //       state.allNominatedTitles.filter(title => title.title !== action.title.title)
-    //     ],
-    //     currentUserTitles: [
-    //       state.currentUserTitles.filter(title => title.title !== action.title.title)
-    //     ]
-    //   }
     case 'RESET_NOMINATED_TITLES': 
       return {
         ...state,
