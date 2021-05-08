@@ -15,11 +15,7 @@ class Search extends React.Component {
     this.props.fetchPrevNominations()
     this.props.fetchPrevUserNominations()
   }
-  
-  componentDidUpdate = () => {
-    this.props.history.push('/')
-  }
-  
+
   handleInput = title => {
     this.props.exSearch(title)
   }
