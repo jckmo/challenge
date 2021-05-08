@@ -9,7 +9,6 @@ const logoutUser = () => {
       }
     })
     .then(() => {
-      sessionStorage.clear()
       dispatch({type: 'LOGOUT'})
     })
   }

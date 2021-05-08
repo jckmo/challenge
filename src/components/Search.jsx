@@ -36,8 +36,11 @@ class Search extends React.Component {
 
   logoutUser = () => {
     this.props.history.push('/loading')
-    this.props.logoutUser()
-    this.props.history.push('/')
+    setTimeout(() => {
+      sessionStorage.clear()
+      this.props.logoutUser()
+      this.props.history.push('/')
+    }, 2000);
   }
 
   render() {
