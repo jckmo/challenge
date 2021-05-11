@@ -63,7 +63,8 @@ class SearchResults extends React.Component {
     )
   }
 
-  showSearch = source => {
+  showSearch = () => {
+    let source = 'fromSearch'
     return (
       <div className='search-results-container'>
         <div className='search-results'>
@@ -90,10 +91,9 @@ class SearchResults extends React.Component {
   }
 
   render() {
-    let source = 'fromSearch'
     return (
       <>
-        {this.props.titles === "" ? this.rollNominated() : this.showSearch(source)}  
+        {this.props.titles === "" ? this.rollNominated() : this.showSearch()}  
       </>
     )
   }

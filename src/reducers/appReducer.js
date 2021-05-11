@@ -13,7 +13,7 @@ const appReducer = (state = {currentUser: '', currentUserTitles: [], searchTitle
     case 'UPDATE_SEARCH':
       return {
         ...state,
-        searchTitles: action.titles,
+        searchTitles: action.titles
       }
     case 'USER_TITLE':
       return {
