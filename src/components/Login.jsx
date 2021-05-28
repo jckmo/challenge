@@ -46,6 +46,8 @@ class Login extends React.Component {
     setTimeout(() => this.props.history.push('/app'), 5000);
   }
 
+  showNote = () => alert('You can make your own account if you would like, or you can use my seed account to view this application. \n\nusername: "Master"\npassword: "1111"')
+
   render() {
     return (
       <div className='login'>
@@ -57,7 +59,8 @@ class Login extends React.Component {
           <button type='submit'>Login</button>
         </form>   
 
-         <p className='sign-up-link' onClick={() => this.props.history.push('/')}>Don't have an account? <span>Signup</span></p>
+        <p className='sign-up-link' onClick={() => this.props.history.push('/')}>Don't have an account? <span>Signup</span></p>
+        <p>A note to employers <button onClick={this.showNote}>click me</button></p>
       </div>
     )
   }

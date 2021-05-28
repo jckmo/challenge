@@ -80,9 +80,7 @@ class Signup extends React.Component {
     checkPassword(this.state.password, this.state.confirm) ? createUser() : reroute()
   }
 
-  showNote = () => {
-    alert('You can make your own account if you would like, or you can use my seed account to view this application. \n\nusername: "Master"\npassword: "1111"')
-  }
+  showNote = () => alert('You can make your own account if you would like, or you can use my seed account to view this application. \n\nusername: "Master"\npassword: "1111"')
 
   render() {
     return (
