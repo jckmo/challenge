@@ -81,7 +81,7 @@ class Signup extends React.Component {
   }
 
   showNote = () => {
-    alert('You can make your own account if you would like, or you can use my seed account to view this application. \nUsername: "Master"\npassword: "1111"')
+    alert('You can make your own account if you would like, or you can use my seed account to view this application. \n\nusername: "Master"\npassword: "1111"')
   }
 
   render() {
