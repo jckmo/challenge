@@ -60,7 +60,7 @@ class Login extends React.Component {
         </form>   
 
         <p className='sign-up-link' onClick={() => this.props.history.push('/')}>Don't have an account? <span>Signup</span></p>
-        <p>A note to employers <button onClick={this.showNote}>click me</button></p>
+        <p><button onClick={this.showNote}>A note to employers</button></p>      
       </div>
     )
   }
