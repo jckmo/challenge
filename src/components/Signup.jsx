@@ -99,7 +99,7 @@ class Signup extends React.Component {
         
         <p className='login-link' onClick={() => this.props.history.push('/login')}>Already have an account? <span>Login</span></p>
 
-        <p onClick={this.showNote} >A note to employers (click me)</p>
+        <p>A note to employers <button onClick={this.showNote}>click me</button></p>
       </div>
     )
   }
